@@ -5,7 +5,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-archivesBaseName = mod_id
+archivesBaseName = archive_base_name
 version = "${mod_version}+Forge+${minecraft_version}"
 group = "com.mrcrayfish"
 
