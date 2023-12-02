@@ -6,7 +6,7 @@ plugins {
 }
 
 archivesBaseName = mod_id
-version = "${mod_version}-${minecraft_version}"
+version = "${mod_version}+Forge+${minecraft_version}"
 group = "com.mrcrayfish"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
