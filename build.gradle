@@ -91,6 +91,7 @@ dependencies {
     implementation fg.deobf("curse.maven:configured-457570:${configured_file_id}")
     implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_file_id}")
     implementation fg.deobf("curse.maven:backpacked-352835:${backpacked_file_id}")
+    implementation fg.deobf("curse.maven:simple-planes-388908:${simple_planes_file_id}")
     compileOnly fg.deobf("curse.maven:controllable-317269:${controllable_file_id}")
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:${jei_version}")

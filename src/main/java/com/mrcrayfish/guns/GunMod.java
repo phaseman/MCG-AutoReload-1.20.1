@@ -83,6 +83,7 @@ public class GunMod
         controllableLoaded = ModList.get().isLoaded("controllable");
         backpackedLoaded = ModList.get().isLoaded("backpacked");
         playerReviveLoaded = ModList.get().isLoaded("playerrevive");
+
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event)
