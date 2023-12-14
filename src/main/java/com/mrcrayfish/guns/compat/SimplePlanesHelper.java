@@ -30,14 +30,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import xyz.przemyk.simpleplanes.entities.PlaneEntity;
 
 public class SimplePlanesHelper {
-    public SimplePlanesHelper() {
+    public static void init() {
         try {
             Class.forName("xyz.przemyk.simpleplanes.compat.MrCrayfishGunCompat");
             GunMod.LOGGER.info("Simple Planes' CGM compat detected, disabling our unofficial one...");
             return;
         } catch (ClassNotFoundException ignored) {
         }
-        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new SimplePlanesHelper());
     }
 
     @SubscribeEvent
