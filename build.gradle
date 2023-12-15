@@ -7,7 +7,7 @@ plugins {
 
 archivesBaseName = archive_base_name
 version = "${mod_version}+Forge+${minecraft_version}"
-group = "com.mrcrayfish"
+group = "com.mrcrayfish.cgm.forge"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -123,12 +123,21 @@ tasks.withType(JavaCompile).configureEach {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact jar
+            artifactId = "${mod_id}-${minecraft_version}"
+            version = mod_version
+            from components.java
         }
     }
+
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
         maven {
-            url "file:///X:/localmaven/mcmods"
+            name = "release"
+            url = 'https://maven.nova-committee.cn/releases'
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
         }
     }
 }
