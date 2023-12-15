@@ -84,7 +84,6 @@ public class GunMod
         controllableLoaded = ModList.get().isLoaded("controllable");
         backpackedLoaded = ModList.get().isLoaded("backpacked");
         playerReviveLoaded = ModList.get().isLoaded("playerrevive");
-        if (ModList.get().isLoaded("simpleplanes")) SimplePlanesHelper.init();
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event)
@@ -104,6 +103,7 @@ public class GunMod
             {
                 MinecraftForge.EVENT_BUS.register(new BoundingBoxManager());
             }
+            if (ModList.get().isLoaded("simpleplanes")) SimplePlanesHelper.init();
         });
     }
 
