@@ -12,11 +12,7 @@ import com.mrcrayfish.guns.common.NetworkGunManager;
 import com.mrcrayfish.guns.common.ProjectileManager;
 import com.mrcrayfish.guns.compat.SimplePlanesHelper;
 import com.mrcrayfish.guns.crafting.WorkbenchIngredient;
-import com.mrcrayfish.guns.datagen.BlockTagGen;
-import com.mrcrayfish.guns.datagen.GunGen;
-import com.mrcrayfish.guns.datagen.ItemTagGen;
-import com.mrcrayfish.guns.datagen.LootTableGen;
-import com.mrcrayfish.guns.datagen.RecipeGen;
+import com.mrcrayfish.guns.datagen.*;
 import com.mrcrayfish.guns.entity.GrenadeEntity;
 import com.mrcrayfish.guns.entity.MissileEntity;
 import com.mrcrayfish.guns.init.*;
@@ -51,6 +47,7 @@ public class GunMod
     public static boolean controllableLoaded = false;
     public static boolean backpackedLoaded = false;
     public static boolean playerReviveLoaded = false;
+    public static boolean sopLoaded = false;
     public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
 
     public GunMod()
@@ -84,6 +81,7 @@ public class GunMod
         controllableLoaded = ModList.get().isLoaded("controllable");
         backpackedLoaded = ModList.get().isLoaded("backpacked");
         playerReviveLoaded = ModList.get().isLoaded("playerrevive");
+        sopLoaded = ModList.get().isLoaded("sophisticatedbackpacks");
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event)

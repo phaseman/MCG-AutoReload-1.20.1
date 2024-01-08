@@ -42,12 +42,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -55,24 +50,14 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.BellBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.TargetBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
@@ -125,7 +110,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         this.setDeltaMovement(dir.x * speed, dir.y * speed, dir.z * speed);
         this.updateHeading();
 
-        /* Spawn the projectile half way between the previous and current position */
+        /* Spawn the projectile halfway between the previous and current position */
         double posX = shooter.xOld + (shooter.getX() - shooter.xOld) / 2.0;
         double posY = shooter.yOld + (shooter.getY() - shooter.yOld) / 2.0 + shooter.getEyeHeight();
         double posZ = shooter.zOld + (shooter.getZ() - shooter.zOld) / 2.0;
@@ -306,7 +291,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
     }
 
     /**
-     * Called when the projectile has run out of it's life. In other words, the projectile managed
+     * Called when the projectile has run out of its life. In other words, the projectile managed
      * to not hit any blocks and instead aged. The grenade uses this to explode in the air.
      */
     protected void onExpired()
@@ -621,7 +606,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         float f1 = Mth.sin(-yaw * 0.017453292F - (float) Math.PI);
         float f2 = -Mth.cos(-pitch * 0.017453292F);
         float f3 = Mth.sin(-pitch * 0.017453292F);
-        return new Vec3((double) (f1 * f2), (double) f3, (double) (f * f2));
+        return new Vec3(f1 * f2, f3, f * f2);
     }
 
     /**
