@@ -58,6 +58,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
@@ -758,6 +759,7 @@ public class GunRenderingHandler {
             int count = Math.min(modifiedGun.getGeneral().getReloadAmount(), 5);
             for (int i = 0; i < count; ++i) {
                 poseStack.pushPose();
+                poseStack.mulPose(new Quaternionf().rotationX(180.0F));
                 if (i > 0) {
                     if (isModel) {
                         float x = (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F;

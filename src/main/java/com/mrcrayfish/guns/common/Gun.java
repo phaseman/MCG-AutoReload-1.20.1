@@ -1575,7 +1575,7 @@ public class Gun implements INBTSerializable<CompoundTag>, IEditorMenu
                 {
                     return Mth.clamp(scope.getFovModifier(), 0.01F, 1.0F);
                 }
-                modifier -= scope.getAdditionalZoom();
+                //modifier -= scope.getAdditionalZoom();
             }
         }
         Modules.Zoom zoom = modifiedGun.getModules().getZoom();
