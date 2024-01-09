@@ -11,9 +11,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Author: MrCrayfish
@@ -28,6 +28,13 @@ public class ModDamageTypes
      */
     public static class Sources
     {
+        private static final String[] msgSuffix = {
+                "death.attack.cgm.bullet.killed",
+                "death.attack.cgm.bullet.eliminated",
+                "death.attack.cgm.bullet.executed",
+                "death.attack.cgm.bullet.annihilated",
+                "death.attack.cgm.bullet.decimated"
+        };
         private static Holder.Reference<DamageType> getHolder(RegistryAccess access, ResourceKey<DamageType> damageTypeKey)
         {
             return access.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(damageTypeKey);
@@ -35,7 +42,12 @@ public class ModDamageTypes
 
         private static DamageSource source(RegistryAccess access, ResourceKey<DamageType> damageTypeKey, @Nullable Entity directEntity, @Nullable Entity causingEntity)
         {
-            return new DamageSource(getHolder(access, damageTypeKey), directEntity, causingEntity);
+            return new DamageSource(getHolder(access, damageTypeKey), directEntity, causingEntity) {
+                @Override
+                public String getMsgId() {
+                    return msgSuffix[ThreadLocalRandom.current().nextInt(5)];
+                }
+            };
         }
 
         public static DamageSource projectile(RegistryAccess access, ProjectileEntity projectile, LivingEntity entity)
