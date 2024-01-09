@@ -759,7 +759,7 @@ public class GunRenderingHandler {
             int count = Math.min(modifiedGun.getGeneral().getReloadAmount(), 5);
             for (int i = 0; i < count; ++i) {
                 poseStack.pushPose();
-                poseStack.mulPose(new Quaternionf().rotationX(180.0F));
+                poseStack.mulPose(new Quaternionf().rotationZYX(22.5F, 0.0F, 150.0F));
                 if (i > 0) {
                     if (isModel) {
                         float x = (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F;
