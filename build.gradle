@@ -95,6 +95,7 @@ dependencies {
     implementation fg.deobf("curse.maven:recruits-523860:${recruits_file_id}")
     implementation fg.deobf("curse.maven:sophisticated-core-618298:${sop_core_file_id}")
     implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:${sop_backpacks_file_id}")
+    implementation fg.deobf("curse.maven:travelers-backpack-321117:${travelers_backpack_file_id}")
     compileOnly fg.deobf("curse.maven:controllable-317269:${controllable_file_id}")
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:${jei_version}")
