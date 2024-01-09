@@ -757,9 +757,10 @@ public class GunRenderingHandler {
             boolean isModel = model.isGui3d();
             this.random.setSeed(Item.getId(item));
             int count = Math.min(modifiedGun.getGeneral().getReloadAmount(), 5);
+            final Quaternionf rotation = new Quaternionf().rotationZYX(22.5F, 0.0F, 150.0F);
             for (int i = 0; i < count; ++i) {
                 poseStack.pushPose();
-                poseStack.mulPose(new Quaternionf().rotationZYX(22.5F, 0.0F, 150.0F));
+                poseStack.mulPose(rotation);
                 if (i > 0) {
                     if (isModel) {
                         float x = (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F;
