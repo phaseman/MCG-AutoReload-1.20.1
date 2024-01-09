@@ -7,6 +7,7 @@
   "plugin": "com.mrcrayfish.guns.mixin.MixinPlugin",
   "mixins": [
     "common.EndPortalBlockMixin",
+    "common.LayeredCauldronBlockMixin",
     "common.LivingEntityMixin",
     "common.SittingPhaseMixin",
     "common.simpleplanes.ShooterUpgradeMixin"
