@@ -108,6 +108,8 @@
     "key.cgm.reload": "装填弹药",
     "key.cgm.unload": "卸载弹药",
     "minecraft.crosshair.default": "默认",
+    "pack.cgm.pbr.desc": "适用于CGM枪械的PBR纹理",
+    "pack.cgm.pbr.title": "CGM PBR纹理",
     "perk.cgm.additional_damage.negative": "降低伤害 §r(§l-%s ♥§r)",
     "perk.cgm.additional_damage.positive": "额外伤害 §r(§l+%s ♥§r)",
     "perk.cgm.ads_speed.negative": "降低ADS速度",
