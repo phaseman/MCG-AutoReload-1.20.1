@@ -12,7 +12,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
@@ -92,13 +91,8 @@ public class ReloadTracker
                 tag.putInt("AmmoCount", tag.getInt("AmmoCount") + amount);
             }
             ammo.shrink(amount);
-
-            // Trigger that the container changed
-            Container container = context.container();
-            if(container != null)
-            {
-                container.setChanged();
-            }
+            // Trigger the post action on ammo consumption, like Container#setChanged.
+            context.onConsume().run();
         }
 
         ResourceLocation reloadSound = this.gun.getSounds().getReload();

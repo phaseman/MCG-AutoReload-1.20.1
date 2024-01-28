@@ -102,6 +102,10 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:${jei_version}")
     annotationProcessor('org.spongepowered:mixin:0.8.5:processor')
+
+    // For compatibility test
+    runtimeOnly fg.deobf("curse.maven:creativecore-257814:${creativecore_file_id}")
+    runtimeOnly fg.deobf("curse.maven:cmdcam-251244:${cmdcam_file_id}")
 }
 
 jar {

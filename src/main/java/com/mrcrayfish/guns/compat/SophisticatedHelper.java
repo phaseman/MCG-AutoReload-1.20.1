@@ -3,7 +3,6 @@ package com.mrcrayfish.guns.compat;
 import com.mrcrayfish.guns.common.AmmoContext;
 import com.mrcrayfish.guns.common.Gun;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.p3pp3rf1y.sophisticatedbackpacks.common.gui.BackpackContext;
@@ -24,10 +23,8 @@ public class SophisticatedHelper {
             {
                 final ItemStack stack = inv.getStackInSlot(i);
                 if(!Gun.isAmmo(stack, id)) continue;
-                final SimpleContainer con = new SimpleContainer();
                 int finalI = i;
-                con.addListener(c -> inv.onContentsChanged(finalI));
-                ctx.set(new AmmoContext(stack, con));
+                ctx.set(new AmmoContext(stack, () -> inv.onContentsChanged(finalI)));
                 return true;
             }
             return true;

@@ -1526,7 +1526,7 @@ public class Gun implements INBTSerializable<CompoundTag>, IEditorMenu
         {
             Item item = ForgeRegistries.ITEMS.getValue(id);
             ItemStack ammo = item != null ? new ItemStack(item, Integer.MAX_VALUE) : ItemStack.EMPTY;
-            return new AmmoContext(ammo, null);
+            return new AmmoContext(ammo);
         }
         for(int i = 0; i < player.getInventory().getContainerSize(); ++i)
         {
