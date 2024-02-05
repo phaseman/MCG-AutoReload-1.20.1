@@ -132,8 +132,8 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         Minecraft minecraft = Minecraft.getInstance();
-        graphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752);
-        graphics.drawString(this.font, this.playerInventory.getDisplayName(), this.inventoryLabelX, this.inventoryLabelY + 19, 4210752);
+        graphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false);
+        graphics.drawString(this.font, this.playerInventory.getDisplayName(), this.inventoryLabelX, this.inventoryLabelY + 19, 4210752, false);
 
         int left = (this.width - this.imageWidth) / 2;
         int top = (this.height - this.imageHeight) / 2;
@@ -165,15 +165,14 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
         if (this.showHelp) {
             graphics.pose().pushPose();
             graphics.pose().scale(0.5F, 0.5F, 0.5F);
-            graphics.drawString(minecraft.font, I18n.get("container.cgm.attachments.window_help"), 56, 38, 0xFFFFFF);
+            graphics.drawString(minecraft.font, I18n.get("container.cgm.attachments.window_help"), 56, 38, 0xFFFFFF, false);
             graphics.pose().popPose();
         }
     }
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, GUI_TEXTURES);
+        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         int left = (this.width - this.imageWidth) / 2;
         int top = (this.height - this.imageHeight) / 2;
         graphics.blit(GUI_TEXTURES, left, top, 0, 0, this.imageWidth, this.imageHeight);

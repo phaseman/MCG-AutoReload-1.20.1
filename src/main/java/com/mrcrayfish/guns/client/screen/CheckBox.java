@@ -1,6 +1,5 @@
 package com.mrcrayfish.guns.client.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -33,9 +32,7 @@ public class CheckBox extends AbstractWidget {
 
     @Override
     public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, GUI);
-        // graphics.blit(int screenX, int screenY, int textureX, int textureY, int textureWidth, int textureHeight);
+        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         graphics.blit(GUI, this.getX(), this.getY(), 0, 0, 8, 8); // checkbox background
         if (this.toggled) {
             graphics.blit(GUI, this.getX(), this.getY() - 1, 8, 0, 9, 8); // the actual checkmark

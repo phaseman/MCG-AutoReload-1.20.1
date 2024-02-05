@@ -304,16 +304,14 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
             Tab tab = this.tabs.get(i);
             if (tab != this.currentTab) {
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                RenderSystem.setShaderTexture(0, GUI_BASE);
+                graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
                 graphics.blit(GUI_BASE, startX + 28 * i, startY - 28, 80, 184, 28, 32);
                 graphics.renderItem(tab.getIcon(), startX + 28 * i + 6, startY - 28 + 8);
             }
         }
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, GUI_BASE);
+        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         graphics.blit(GUI_BASE, startX, startY, 0, 0, 173, 184);
         graphics.blit(GUI_BASE, startX + 173, startY, 78, 184, 173, 0, 1, 184, 256, 256);
         graphics.blit(GUI_BASE, startX + 251, startY, 174, 0, 24, 184);
@@ -324,15 +322,13 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
             int i = this.tabs.indexOf(this.currentTab);
             int u = i == 0 ? 80 : 108;
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShaderTexture(0, GUI_BASE);
+            graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
             graphics.blit(GUI_BASE, startX + 28 * i, startY - 28, u, 214, 28, 32);
             graphics.renderItem(this.currentTab.getIcon(), startX + 28 * i + 6, startY - 28 + 8);
         }
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, GUI_BASE);
+        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         if (this.workbench.getItem(0).isEmpty()) {
             graphics.blit(GUI_BASE, startX + 174, startY + 18, 165, 199, 16, 16);
@@ -370,8 +366,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
 
         this.filteredMaterials = this.getMaterials();
         for (int i = 0; i < this.filteredMaterials.size(); i++) {
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShaderTexture(0, GUI_BASE);
+            graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
             MaterialItem materialItem = this.filteredMaterials.get(i);
             ItemStack stack = materialItem.getDisplayStack();
