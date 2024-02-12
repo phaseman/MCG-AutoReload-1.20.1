@@ -285,8 +285,8 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         int offset = this.tabs.isEmpty() ? 0 : 28;
-        graphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY - 28 + offset, Color.WHITE.getRGB());
-        graphics.drawString(this.font, this.playerInventory.getDisplayName(), this.inventoryLabelX, this.inventoryLabelY - 9 + offset, Color.WHITE.getRGB());
+        graphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY - 28 + offset, 4210752, false);
+        graphics.drawString(this.font, this.playerInventory.getDisplayName(), this.inventoryLabelX, this.inventoryLabelY - 9 + offset, 4210752, false);
     }
 
     @Override
