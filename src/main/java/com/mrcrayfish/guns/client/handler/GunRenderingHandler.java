@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.mrcrayfish.guns.Config;
+import com.mrcrayfish.guns.GunMod;
 import com.mrcrayfish.guns.Reference;
 import com.mrcrayfish.guns.client.GunModel;
 import com.mrcrayfish.guns.client.GunRenderType;
@@ -16,6 +17,7 @@ import com.mrcrayfish.guns.client.util.RenderUtil;
 import com.mrcrayfish.guns.common.GripType;
 import com.mrcrayfish.guns.common.Gun;
 import com.mrcrayfish.guns.common.properties.SightAnimation;
+import com.mrcrayfish.guns.compat.CMDCamHelper;
 import com.mrcrayfish.guns.event.GunFireEvent;
 import com.mrcrayfish.guns.init.ModSyncedDataKeys;
 import com.mrcrayfish.guns.item.GrenadeItem;
@@ -825,8 +827,8 @@ public class GunRenderingHandler {
         this.immersiveRoll = Mth.lerp(speed, this.immersiveRoll, targetAngle);
 
         float deltaY = (float) Mth.clamp((mc.player.yo - mc.player.getY()), -1.0, 1.0);
-        deltaY *= 1.0 - AimingHandler.get().getNormalisedAdsProgress();
-        deltaY *= 1.0 - (Mth.abs(mc.player.getXRot()) / 90.0F);
+        deltaY *= (float) (1.0 - AimingHandler.get().getNormalisedAdsProgress());
+        deltaY *= (float) (1.0 - (Mth.abs(mc.player.getXRot()) / 90.0F));
         this.fallSway = Mth.approach(this.fallSway, deltaY * 60F * Config.CLIENT.display.swaySensitivity.get().floatValue(), 10.0F);
 
         float intensity = mc.player.isSprinting() ? 0.75F : 1.0F;
@@ -835,6 +837,7 @@ public class GunRenderingHandler {
 
     @SubscribeEvent
     public void onCameraSetup(ViewportEvent.ComputeCameraAngles event) {
+        if (GunMod.cmdCamLoaded && CMDCamHelper.isRollModified()) return;
         if (Config.CLIENT.display.cameraRollEffect.get()) {
             float roll = (float) Mth.lerp(event.getPartialTick(), this.prevImmersiveRoll, this.immersiveRoll);
             roll = (float) Math.sin((roll * Math.PI) / 2.0);

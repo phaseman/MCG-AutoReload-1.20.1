@@ -49,6 +49,7 @@ public class GunMod
     public static boolean playerReviveLoaded = false;
     public static boolean sopLoaded = false;
     public static boolean travelersBackpackLoaded = false;
+    public static boolean cmdCamLoaded = false;
     public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
 
     public GunMod()
@@ -84,6 +85,7 @@ public class GunMod
         playerReviveLoaded = ModList.get().isLoaded("playerrevive");
         sopLoaded = ModList.get().isLoaded("sophisticatedbackpacks");
         travelersBackpackLoaded = ModList.get().isLoaded("travelersbackpack");
+        cmdCamLoaded = ModList.get().isLoaded("cmdcam");
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event)

@@ -122,12 +122,11 @@ public class ControllerHandler
             if(player != null)
             {
                 ItemStack heldItem = player.getMainHandItem();
-                if(heldItem.getItem() instanceof GunItem)
+                if(heldItem.getItem() instanceof GunItem gunItem)
                 {
                     actions.put(GunButtonBindings.AIM, new Action(Component.translatable("cgm.action.aim"), Action.Side.RIGHT));
                     actions.put(GunButtonBindings.SHOOT, new Action(Component.translatable("cgm.action.shoot"), Action.Side.RIGHT));
 
-                    GunItem gunItem = (GunItem) heldItem.getItem();
                     Gun modifiedGun = gunItem.getModifiedGun(heldItem);
                     CompoundTag tag = heldItem.getTag();
                     if(tag != null && tag.getInt("AmmoCount") < GunEnchantmentHelper.getAmmoCapacity(heldItem, modifiedGun))
