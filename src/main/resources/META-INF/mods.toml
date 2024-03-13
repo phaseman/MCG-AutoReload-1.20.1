@@ -4,7 +4,7 @@ license="GPL3"
 
 [[mods]]
 modId="cgm"
-version="${file.jarVersion}}"
+version="${file.jarVersion}"
 displayName="MrCrayfish's Gun Mod"
 updateJSONURL="https://raw.githubusercontent.com/MrCrayfish/ModUpdates/master/cgm/update.json"
 displayURL="https://mrcrayfish.com/"
