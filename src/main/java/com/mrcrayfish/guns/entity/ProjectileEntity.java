@@ -262,17 +262,15 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
             }
         }
 
-        final Vec3 delta = this.getDeltaMovement();
+        if (Config.COMMON.gameplay.projectileSlowDownInFluids.get() && this.isInFluidType()) {
+            Vec3 delta = this.getDeltaMovement();
+            double dx = delta.x;
+            double dy = delta.y;
+            double dz = delta.z;
+            double x1 = this.getX() + dx;
+            double y1 = this.getY() + dy;
+            double z1 = this.getZ() + dz;
 
-        double dx = delta.x;
-        double dy = delta.y;
-        double dz = delta.z;
-
-        double x1 = this.getX() + dx;
-        double y1 = this.getY() + dy;
-        double z1 = this.getZ() + dz;
-
-        if (this.isInFluidType()) {
             for(int j = 0; j < 4; ++j) {
                 this.level().addParticle(ParticleTypes.BUBBLE, x1 - dx * 0.25D, y1 - dy * 0.25D, z1 - dz * 0.25D, dx, dy, dz);
             }
@@ -803,7 +801,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
      *
      * @param entity The entity to explode
      * @param radius The amount of radius the entity should deal
-     * @param forceNone If true, forces the explosion mode to be NONE instead of config value
+     * @param breakTerrain If true, the explosion will destroy the blocks nearby
      */
     public static void createExplosion(Entity entity, float radius, boolean breakTerrain)
     {
@@ -851,9 +849,9 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
      */
     public static class EntityResult
     {
-        private Entity entity;
-        private Vec3 hitVec;
-        private boolean headshot;
+        private final Entity entity;
+        private final Vec3 hitVec;
+        private final boolean headshot;
 
         public EntityResult(Entity entity, Vec3 hitVec, boolean headshot)
         {

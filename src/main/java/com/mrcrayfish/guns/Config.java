@@ -197,6 +197,7 @@ public class Config
         public final ForgeConfigSpec.BooleanValue enableKnockback;
         public final ForgeConfigSpec.DoubleValue knockbackStrength;
         public final ForgeConfigSpec.BooleanValue improvedHitboxes;
+        public final ForgeConfigSpec.BooleanValue projectileSlowDownInFluids;
 
         public Gameplay(ForgeConfigSpec.Builder builder)
         {
@@ -211,6 +212,7 @@ public class Config
                 this.enableKnockback = builder.comment("If true, projectiles will cause knockback when an entity is hit. By default this is set to true to match the behaviour of Minecraft.").define("enableKnockback", true);
                 this.knockbackStrength = builder.comment("Sets the strength of knockback when shot by a bullet projectile. Knockback must be enabled for this to take effect. If value is equal to zero, knockback will use default minecraft value").defineInRange("knockbackStrength", 0.15, 0.0, 1.0);
                 this.improvedHitboxes = builder.comment("If true, improves the accuracy of weapons by considering the ping of the player. This has no affect on singleplayer. This will add a little overhead if enabled.").define("improvedHitboxes", false);
+                this.projectileSlowDownInFluids = builder.comment("If true, the projectiles will slow down in the fluids.").define("projectileSlowDownInFluids", true);
             }
             builder.pop();
         }

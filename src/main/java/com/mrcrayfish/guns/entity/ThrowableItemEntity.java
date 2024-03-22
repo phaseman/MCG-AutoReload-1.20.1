@@ -1,5 +1,6 @@
 package com.mrcrayfish.guns.entity;
 
+import com.mrcrayfish.guns.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -91,16 +92,16 @@ public abstract class ThrowableItemEntity extends ThrowableProjectile implements
             this.onDeath();
             return;
         }
-        final Vec3 delta = this.getDeltaMovement();
 
-        double dx = delta.x;
-        double dy = delta.y;
-        double dz = delta.z;
+        if (Config.COMMON.gameplay.projectileSlowDownInFluids.get() && this.isInFluidType()) {
+            Vec3 delta = this.getDeltaMovement();
+            double dx = delta.x;
+            double dy = delta.y;
+            double dz = delta.z;
+            double x1 = this.getX() + dx;
+            double y1 = this.getY() + dy;
+            double z1 = this.getZ() + dz;
 
-        double x1 = this.getX() + dx;
-        double y1 = this.getY() + dy;
-        double z1 = this.getZ() + dz;
-        if (this.isInFluidType()) {
             for(int j = 0; j < 4; ++j) {
                 this.level().addParticle(ParticleTypes.BUBBLE, x1 - dx * 0.25D, y1 - dy * 0.25D, z1 - dz * 0.25D, dx, dy, dz);
             }
