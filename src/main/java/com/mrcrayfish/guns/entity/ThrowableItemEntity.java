@@ -2,6 +2,7 @@ package com.mrcrayfish.guns.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -83,10 +85,26 @@ public abstract class ThrowableItemEntity extends ThrowableProjectile implements
     public void tick()
     {
         super.tick();
-        if(this.shouldBounce && this.tickCount >= this.maxLife)
+        if (this.shouldBounce && this.tickCount >= this.maxLife)
         {
             this.remove(RemovalReason.KILLED);
             this.onDeath();
+            return;
+        }
+        final Vec3 delta = this.getDeltaMovement();
+
+        double dx = delta.x;
+        double dy = delta.y;
+        double dz = delta.z;
+
+        double x1 = this.getX() + dx;
+        double y1 = this.getY() + dy;
+        double z1 = this.getZ() + dz;
+        if (this.isInFluidType()) {
+            for(int j = 0; j < 4; ++j) {
+                this.level().addParticle(ParticleTypes.BUBBLE, x1 - dx * 0.25D, y1 - dy * 0.25D, z1 - dz * 0.25D, dx, dy, dz);
+            }
+            this.setDeltaMovement(delta.scale(.5F));
         }
     }
 

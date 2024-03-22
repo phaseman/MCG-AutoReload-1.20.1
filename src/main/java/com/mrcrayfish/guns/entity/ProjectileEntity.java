@@ -237,14 +237,13 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
                 hitEntities = this.findEntitiesOnPath(startVec, endVec);
             }
 
-            if(hitEntities != null && hitEntities.size() > 0)
+            if(hitEntities != null && !hitEntities.isEmpty())
             {
                 for(EntityResult entityResult : hitEntities)
                 {
                     result = new ExtendedEntityRayTraceResult(entityResult);
-                    if(((EntityHitResult) result).getEntity() instanceof Player)
+                    if(((EntityHitResult) result).getEntity() instanceof Player player)
                     {
-                        Player player = (Player) ((EntityHitResult) result).getEntity();
 
                         if(this.shooter instanceof Player && !((Player) this.shooter).canHarmPlayer(player))
                         {
@@ -262,6 +261,24 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
                 this.onHit(result, startVec, endVec);
             }
         }
+
+        final Vec3 delta = this.getDeltaMovement();
+
+        double dx = delta.x;
+        double dy = delta.y;
+        double dz = delta.z;
+
+        double x1 = this.getX() + dx;
+        double y1 = this.getY() + dy;
+        double z1 = this.getZ() + dz;
+
+        if (this.isInFluidType()) {
+            for(int j = 0; j < 4; ++j) {
+                this.level().addParticle(ParticleTypes.BUBBLE, x1 - dx * 0.25D, y1 - dy * 0.25D, z1 - dz * 0.25D, dx, dy, dz);
+            }
+            this.setDeltaMovement(delta.subtract(.0F, .1F, .0F).scale(.5F));
+        }
+
 
         double nextPosX = this.getX() + this.getDeltaMovement().x();
         double nextPosY = this.getY() + this.getDeltaMovement().y();
@@ -383,7 +400,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
                 {
                     box = box.move(boundingBox.getCenter().x, boundingBox.minY, boundingBox.getCenter().z);
                     Optional<Vec3> headshotHitPos = box.clip(startVec, endVec);
-                    if(!headshotHitPos.isPresent())
+                    if(headshotHitPos.isEmpty())
                     {
                         box = box.inflate(Config.COMMON.gameplay.growBoundingBoxAmount.get(), 0, Config.COMMON.gameplay.growBoundingBoxAmount.get());
                         headshotHitPos = box.clip(startVec, endVec);
@@ -533,7 +550,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
             PacketHandler.getPlayChannel().sendToPlayer(() -> (ServerPlayer) this.shooter, new S2CMessageProjectileHitEntity(hitVec.x, hitVec.y, hitVec.z, hitType, entity instanceof Player));
         }
         /* Send blood particle to tracking clients. */
-        PacketHandler.getPlayChannel().sendToTracking(() -> entity, new S2CMessageBlood(hitVec.x, hitVec.y, hitVec.z));
+        PacketHandler.getPlayChannel().sendToTrackingEntity(() -> entity, new S2CMessageBlood(hitVec.x, hitVec.y, hitVec.z));
     }
 
     protected void onHitBlock(BlockState state, BlockPos pos, Direction face, double x, double y, double z)

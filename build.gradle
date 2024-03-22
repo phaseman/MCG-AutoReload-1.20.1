@@ -104,8 +104,8 @@ dependencies {
     annotationProcessor('org.spongepowered:mixin:0.8.5:processor')
 
     // For compatibility test
-    implementation fg.deobf("curse.maven:creativecore-257814:${creativecore_file_id}")
-    implementation fg.deobf("curse.maven:cmdcam-251244:${cmdcam_file_id}")
+    compileOnly fg.deobf("curse.maven:creativecore-257814:${creativecore_file_id}")
+    compileOnly fg.deobf("curse.maven:cmdcam-251244:${cmdcam_file_id}")
 }
 
 jar {
