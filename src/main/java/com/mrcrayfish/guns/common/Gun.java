@@ -8,6 +8,7 @@ import com.mrcrayfish.guns.annotation.Ignored;
 import com.mrcrayfish.guns.annotation.Optional;
 import com.mrcrayfish.guns.client.ClientHandler;
 import com.mrcrayfish.guns.compat.BackpackHelper;
+import com.mrcrayfish.guns.compat.L2BackpackHelper;
 import com.mrcrayfish.guns.compat.SophisticatedHelper;
 import com.mrcrayfish.guns.compat.TravelersBackpackHelper;
 import com.mrcrayfish.guns.debug.Debug;
@@ -1548,6 +1549,9 @@ public class Gun implements INBTSerializable<CompoundTag>, IEditorMenu
         if(GunMod.travelersBackpackLoaded && ctx.equals(AmmoContext.NONE))
         {
             ctx = TravelersBackpackHelper.findAmmo(player, id);
+        }
+        if(GunMod.l2BackpackLoaded && ctx.equals(AmmoContext.NONE)) {
+            ctx = L2BackpackHelper.findAmmo(player, id);
         }
         return ctx;
     }

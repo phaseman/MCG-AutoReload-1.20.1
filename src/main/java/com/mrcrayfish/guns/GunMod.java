@@ -45,10 +45,12 @@ public class GunMod
 {
     public static boolean debugging = false;
     public static boolean controllableLoaded = false;
+    public static boolean curiosLoaded = false;
     public static boolean backpackedLoaded = false;
     public static boolean playerReviveLoaded = false;
     public static boolean sopLoaded = false;
     public static boolean travelersBackpackLoaded = false;
+    public static boolean l2BackpackLoaded = false;
     public static boolean cmdCamLoaded = false;
     public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
 
@@ -81,10 +83,12 @@ public class GunMod
             bus.addListener(ClientHandler::registerAdditional);
         });
         controllableLoaded = ModList.get().isLoaded("controllable");
+        curiosLoaded = ModList.get().isLoaded("curios");
         backpackedLoaded = ModList.get().isLoaded("backpacked");
         playerReviveLoaded = ModList.get().isLoaded("playerrevive");
         sopLoaded = ModList.get().isLoaded("sophisticatedbackpacks");
         travelersBackpackLoaded = ModList.get().isLoaded("travelersbackpack");
+        l2BackpackLoaded = ModList.get().isLoaded("l2backpack");
         cmdCamLoaded = ModList.get().isLoaded("cmdcam");
     }
 
