@@ -7,13 +7,18 @@ import com.mrcrayfish.guns.common.GripType;
 import com.mrcrayfish.guns.common.Gun;
 import com.mrcrayfish.guns.compat.PlayerReviveHelper;
 import com.mrcrayfish.guns.event.GunFireEvent;
+import com.mrcrayfish.guns.event.GunReloadEvent;
+import com.mrcrayfish.guns.init.ModSyncedDataKeys;
 import com.mrcrayfish.guns.item.GunItem;
 import com.mrcrayfish.guns.network.PacketHandler;
+import com.mrcrayfish.guns.network.message.C2SMessageReload;
 import com.mrcrayfish.guns.network.message.C2SMessageShoot;
 import com.mrcrayfish.guns.network.message.C2SMessageShooting;
 import com.mrcrayfish.guns.util.GunEnchantmentHelper;
 import com.mrcrayfish.guns.util.GunModifierHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemCooldowns;
@@ -198,8 +203,10 @@ public class ShootingHandler
         if(!(heldItem.getItem() instanceof GunItem))
             return;
 
-        if(!Gun.hasAmmo(heldItem) && !player.isCreative())
+        if(!Gun.hasAmmo(heldItem) && !player.isCreative()) {
+            ReloadHandler.get().setReloading(true);
             return;
+        }
         
         if(player.isSpectator())
             return;
